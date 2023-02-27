@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package core.v1;
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+
+service ChannelService {
+  rpc List(ListChannelsRequest) returns (ListChannelsResponse);
+  rpc Get(GetChannelRequest) returns (Channel);
+  rpc Create(CreateChannelRequest) returns (Channel);
+  rpc Update(UpdateChannelRequest) returns (Channel);
+  rpc Delete(DeleteChannelRequest) returns (google.protobuf.Empty);
+}
+
+message Channel {
+  string id = 1;
+  string name = 2;
+}
+
+message ListChannelsRequest {}
+message ListChannelsResponse {
+  repeated Channel channels = 1;
+  string next_page_token = 2;
+}
+
+message GetChannelRequest {
+  string id = 1;
+}
+
+message CreateChannelRequest {
+  Channel channel = 1;
+}
+
+message UpdateChannelRequest {
+  Channel channel = 1;
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message DeleteChannelRequest {
+  string id = 1;
+}
