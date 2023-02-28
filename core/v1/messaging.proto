@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package core.v1;
+
+service MessagingService {
+  rpc Send(SendMessageRequest) returns (SendMessageResponse);
+  rpc Subscribe(SubscribeMessagingRequest) returns (stream Message);
+}
+
+message SendMessageRequest {
+  string to = 1;
+  string content = 2;
+}
+
+message SendMessageResponse {}
+
+message SubscribeMessagingRequest {}
+message Message {
+  string from = 1;
+  string to = 2;
+  string content = 3;
+}
